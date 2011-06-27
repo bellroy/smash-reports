@@ -10,7 +10,7 @@ class Report < ActiveRecord::Base
   end
 
   def needs_more_data?
-    not report_fields.all? { |k| @field_values.has_key? k }
+    report_fields.any? { |k| @field_values[k].blank? }
   end
 
   def sql_query_with_params(params)

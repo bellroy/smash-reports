@@ -3,10 +3,16 @@ class Report < ActiveRecord::Base
   def db; self.class.db end
 
   attr_accessor :field_values
+  attr_reader :results
+
+  def after_initialize
+    @results = nil
+    @field_values = {}
+  end
 
   def execute
     return if needs_more_data?
-    @result = db.fetch sql_query_with_params(@field_values)
+    @results = db.fetch sql_query_with_params(@field_values)
   end
 
   def needs_more_data?

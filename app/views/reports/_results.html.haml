@@ -1,0 +1,11 @@
+- if results.present?
+  %table
+    %thead
+      %tr
+        - results.columns.each do |column|
+          %td= column
+    %tbody
+      - results.each do |row|
+        - results.columns.each do |column|
+          %td= row[column]
+

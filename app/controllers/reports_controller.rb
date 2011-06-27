@@ -6,7 +6,10 @@ class ReportsController < ApplicationController
   end
 
   def show
-    respond_with(@report = Report.find(params[:id]))
+    @report = Report.find(params[:id])
+    @report.field_values = params[:field_values]
+    @report.execute
+    respond_with @report
   end
 
   def new

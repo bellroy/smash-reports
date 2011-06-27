@@ -1,13 +1,20 @@
 class Report < ActiveRecord::Base
-  def db; DB end
-
+  def self.db; DB end
   def db; self.class.db end
 
-  def execute(params = {})
-    db.fetch sql_query_with_params(params)
+  attr_accessor :field_values
+
+  def execute
+    return if needs_more_data?
+    @result = db.fetch sql_query_with_params(@field_values)
   end
 
-  def sql_query_with_params(params = {})
+  def needs_more_data?
+    not report_fields.all? { |k| @field_values.has_key? k }
+  end
+
+  def sql_query_with_params(params)
+    params ||= {}
     q = sql_query.dup
     params.each { |k,v| q.gsub! field_regexp(k), "#{v}" }
     q

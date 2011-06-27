@@ -1,0 +1,15 @@
+%h2 Reports
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Actions
+  %tbody
+    - @reports.each do |report|
+      %tr
+        %td= h report.name
+        %td= h report.description
+        %td
+

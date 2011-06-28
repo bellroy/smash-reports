@@ -2,6 +2,8 @@
 
 %p= h @report.description
 
+%p= link_to "Edit report", edit_report_url(@report)
+
 - unless @report.report_fields.empty?
   = render :partial => "fields", :object => @report.report_fields_with_values, :as => :fields
 

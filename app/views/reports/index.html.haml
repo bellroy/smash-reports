@@ -2,18 +2,8 @@
 
 = link_to "New Report", new_report_url
 
-%table#reports
-  %thead
-    %tr
-      %th Name
-      %th Description
-      %th Actions
-  %tbody
-    - @reports.each do |report|
-      %tr
-        %td= h report.name
-        %td= h report.description
-        %td
-          = link_to "Run", report
-          = link_to "Edit", edit_report_url(report)
-
+- @reports.each do |report|
+  %a.report{:href => url_for(report)}
+    %article.report
+      %h3= h report.name
+      %p.description= h report.description

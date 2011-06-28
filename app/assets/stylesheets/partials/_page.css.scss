@@ -1,4 +1,5 @@
 @import "compass/css3";
+@import "compass/typography/links";
 
 //-----------------------------------------------
 // The following html5-boilerplate styles should
@@ -80,4 +81,14 @@ table {
   tbody tr:nth-child(2n) {
     background-color: #eeeeee;
   }
+}
+
+a.report {
+  display: block;
+  @include unstyled-link;
+  &:hover { background-color: #eeeeee; }
+}
+article.report {
+  border-bottom: 1px dotted silver;
+  padding-top: 16px;
 }

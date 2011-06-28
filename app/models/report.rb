@@ -10,6 +10,10 @@ class Report < ActiveRecord::Base
     @field_values = {}
   end
 
+  def field_values=(h)
+    @field_values = h || {}
+  end
+
   def execute
     return if needs_more_data?
     @results = db.fetch sql_query_with_params(@field_values)
@@ -29,6 +33,12 @@ class Report < ActiveRecord::Base
   def report_fields
     return [] if sql_query.blank?
     sql_query.scan(field_regexp).flatten.collect {|f| f.strip.to_sym }.uniq
+  end
+
+  def report_fields_with_values
+    fields = HashWithIndifferentAccess.new(@field_values || {})
+    report_fields.each { |f| fields[f] ||= '' }
+    fields
   end
 
 private

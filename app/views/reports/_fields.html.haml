@@ -1,0 +1,6 @@
+= form_tag '', :method => :get do
+  - fields.each do |field, value|
+    %p
+      = label_tag field, field.to_s.humanize
+      = text_field_tag "field_values[#{field}]", value
+  = submit_tag "Run"

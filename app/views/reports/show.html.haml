@@ -2,6 +2,9 @@
 
 %p= h @report.description
 
+- unless @report.report_fields.empty?
+  = render :partial => "fields", :object => @report.report_fields_with_values, :as => :fields
+
 - unless @report.needs_more_data?
   = render :partial => "results", :object => @report.results
 

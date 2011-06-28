@@ -1,4 +1,6 @@
-- if results.present?
+- if results.empty?
+  %p.no_results Report returned no results.
+- else
   %table
     %thead
       %tr

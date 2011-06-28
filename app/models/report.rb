@@ -28,11 +28,11 @@ class Report < ActiveRecord::Base
 
   def execute
     return if needs_more_data?
-    @results = db.fetch sql_query_with_params(@field_values)
+    @results = db.fetch sql_query_with_params(report_fields_with_values)
   end
 
   def needs_more_data?
-    report_fields.any? { |k| @field_values[k].blank? }
+    report_fields.any? { |k| report_fields_with_values[k].blank? }
   end
 
   def sql_query_with_params(params)

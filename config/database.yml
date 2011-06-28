@@ -1,5 +1,5 @@
 # MySQL.  Versions 4.1 and 5.0 are recommended.
-# 
+#
 # Install the MYSQL driver
 #   gem install mysql2
 #
@@ -40,3 +40,14 @@ production:
   username: root
   password:
   socket: /tmp/mysql.sock
+
+development-reports:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: kando_saasu
+  pool: 5
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+

@@ -50,6 +50,7 @@ class Report < ActiveRecord::Base
   def report_fields_with_values
     fields = HashWithIndifferentAccess.new(parsed_defaults || {})
     report_fields.each { |f| fields[f] = @field_values[f] || fields[f] || '' }
+    fields.each { |f,v| fields[f] = Date.parse(v).to_date.to_s(:db) if sounds_like_a_date? f }
     fields
   end
 
@@ -72,5 +73,9 @@ private
     parsed = YAML.load defaults
     raise "Invalid defaults string" unless parsed.is_a? Hash
     parsed
+  end
+
+  def sounds_like_a_date?(field)
+    field.to_s.match(/date|time/i)
   end
 end

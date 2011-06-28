@@ -63,4 +63,10 @@ describe Report do
     subject.report_fields_with_values[:foo].should == 'bar'
     subject.report_fields_with_values[:baz].should be_empty
   end
+
+  it "should parse date fields" do
+    subject.stub(:report_fields) { ['foo_date'] }
+    subject.field_values = { 'foo_date' => "1/1/2010" }
+    subject.report_fields_with_values[:foo_date].should == "2010-01-01"
+  end
 end

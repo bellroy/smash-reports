@@ -8,6 +8,7 @@
           %th= column
     %tbody
       - results.each do |row|
-        - results.columns.each do |column|
-          %td= row[column]
+        %tr
+          - results.columns.each do |column|
+            %td= row[column]
 

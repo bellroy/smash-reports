@@ -1,5 +1,5 @@
-%h3 Report parameters
-= form_tag '', :method => :get do
+= form_tag '', :method => :get, :class => "report-parameters" do
+  %h2 Report parameters
   - fields.each do |field, value|
     %p
       = label_tag field, field.to_s.humanize

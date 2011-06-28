@@ -1,3 +1,5 @@
+%h2 Report Results
+%p= link_to "Download as .csv", report_url(@report, :format => :csv, :field_values => @report.field_values)
 - if results.empty?
   %p.no_results Report returned no results.
 - else

@@ -38,4 +38,29 @@ describe Report do
       subject.report_fields.should == [:bar]
     end
   end
+
+  it "should accept a blank defaults string" do
+    subject.defaults = ""
+    subject.valid?
+    subject.errors[:defaults].should be_empty
+  end
+
+  it "should complain about invalid YAML in defaults" do
+    subject.defaults = "foo: {"
+    subject.valid?
+    subject.errors[:defaults].should_not be_empty
+  end
+
+  it "should accept valid YAML in defaults" do
+    subject.defaults = "foo: bar\nbaz: pants"
+    subject.valid?
+    subject.errors[:defaults].should be_empty
+  end
+
+  it "should parse YAML defaults for field values" do
+    subject.stub(:report_fields) { ['foo', 'baz']}
+    subject.defaults = "foo: bar"
+    subject.report_fields_with_values[:foo].should == 'bar'
+    subject.report_fields_with_values[:baz].should be_empty
+  end
 end

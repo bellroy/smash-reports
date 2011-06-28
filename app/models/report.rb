@@ -2,10 +2,22 @@ class Report < ActiveRecord::Base
   def self.db; DB end
   def db; self.class.db end
 
+  class YamlValidator < ActiveModel::EachValidator
+    def validate_each(record, attribute, value)
+      begin
+        YAML.parse(value)
+      rescue Psych::SyntaxError
+        record.errors[attribute] << (options[:message] || "is not valid YAML")
+      end
+    end
+  end
+
   attr_accessor :field_values
   attr_reader :results
 
-  def after_initialize
+  validates :defaults, :yaml => true
+
+  after_initialize do
     @results = nil
     @field_values = {}
   end
@@ -36,8 +48,8 @@ class Report < ActiveRecord::Base
   end
 
   def report_fields_with_values
-    fields = HashWithIndifferentAccess.new(@field_values || {})
-    report_fields.each { |f| fields[f] ||= '' }
+    fields = HashWithIndifferentAccess.new(parsed_defaults || {})
+    report_fields.each { |f| fields[f] = @field_values[f] || fields[f] || '' }
     fields
   end
 
@@ -53,5 +65,12 @@ private
     else
       /<%(.+?)%>/
     end
+  end
+
+  def parsed_defaults
+    return {} if defaults.blank?
+    parsed = YAML.load defaults
+    raise "Invalid defaults string" unless parsed.is_a? Hash
+    parsed
   end
 end

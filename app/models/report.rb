@@ -41,6 +41,11 @@ class Report < ActiveRecord::Base
     fields
   end
 
+  def to_csv
+    return "" if needs_more_data?
+    @results.to_csv
+  end
+
 private
   def field_regexp(for_field = nil)
     if for_field

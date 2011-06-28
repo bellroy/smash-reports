@@ -9,4 +9,5 @@
 
 - unless @report.needs_more_data?
   = render :partial => "results", :object => @report.results
+  %p= link_to "Download as .csv", report_url(@report, :format => :csv, :field_values => @report.field_values)
 

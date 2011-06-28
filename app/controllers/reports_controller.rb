@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
   respond_to :html
+  respond_to :csv, :only => :show
 
   def index
     respond_with(@reports = Report.all)
@@ -9,7 +10,9 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
     @report.field_values = params[:field_values]
     @report.execute
-    respond_with @report
+    respond_with @report do |format|
+      format.csv { render :text => @report.to_csv }
+    end
   end
 
   def new

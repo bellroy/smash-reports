@@ -80,7 +80,10 @@ private
   end
 
   def parse_date(value)
-    return '' if value.blank?
-    Date.parse(value).to_date.to_s(:db)
+    begin
+      Date.parse(value).to_date.to_s(:db)
+    rescue ArgumentError
+      nil
+    end
   end
 end

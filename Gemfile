@@ -9,6 +9,7 @@ gem 'mysql2'
 
 # Asset template engines
 gem 'sass-rails', "~> 3.1.0.rc"
+gem 'compass', :git => 'https://github.com/chriseppstein/compass.git', :branch => 'rails31'
 gem 'coffee-script'
 gem 'uglifier'
 
@@ -31,3 +32,4 @@ gem "simple_form", :git => "https://github.com/plataformatec/simple_form.git"
 
 #gem "ruport", :git => "https://github.com/ruport/ruport.git"
 gem "sequel", "~> 3.24.1"
+

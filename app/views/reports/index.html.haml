@@ -1,6 +1,7 @@
-%h2 All Reports
-
-= link_to "New Report", new_report_url
+- content_for :header do
+  %h1 All Reports
+  %nav
+    = link_to "Add New Report", new_report_url
 
 - @reports.each do |report|
   %a.report{:href => url_for(report)}

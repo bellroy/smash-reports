@@ -1,3 +1,6 @@
-%h2 New Report
+- content_for :header do
+  %h1 New Report
+  %nav
+    = link_to "Back to report list", reports_url
 
 = render :partial => 'form', :object => @report, :as => :report

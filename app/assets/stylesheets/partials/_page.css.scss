@@ -56,13 +56,15 @@ body {}
 header {
   background-color: #333;
   color: #eee;
+  a { @include link-colors(#eee, #eee, #eee, #eee); }
+  nav { padding-bottom: 16px; }
 }
 
 #main {}
 
 footer {}
 
-header, #main, footer { padding: 5em 7.5em; }
+header, #main, footer { padding-left: 7.5em; padding-right: 7.5em; }
 
 h1 { @include font-size(32px); line-height: 2 }
 h2 { @include font-size(24px); line-height: 2 }

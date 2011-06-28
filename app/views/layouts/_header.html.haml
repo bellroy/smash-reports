@@ -1,1 +1,4 @@
-%h1= link_to "Smash Reports", reports_url
+- if content_for? :header
+  = content_for :header
+- else
+  %h1= link_to "Smash Reports", reports_url

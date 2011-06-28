@@ -1,8 +1,9 @@
-%h2= h @report.name
-
-%p= h @report.description
-
-%p= link_to "Edit report", edit_report_url(@report)
+- content_for :header do
+  %h1= h @report.name
+  %p.description= h @report.description
+  %nav
+    = link_to "Back to report list", reports_url
+    = link_to "Edit report", edit_report_url(@report)
 
 - unless @report.report_fields.empty?
   = render :partial => "fields", :object => @report.report_fields_with_values, :as => :fields

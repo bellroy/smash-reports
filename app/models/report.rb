@@ -50,7 +50,7 @@ class Report < ActiveRecord::Base
   def report_fields_with_values
     fields = HashWithIndifferentAccess.new(parsed_defaults || {})
     report_fields.each { |f| fields[f] = @field_values[f] || fields[f] || '' }
-    fields.each { |f,v| fields[f] = Date.parse(v).to_date.to_s(:db) if sounds_like_a_date? f }
+    fields.each { |f,v| fields[f] = parse_date(v) if sounds_like_a_date? f }
     fields
   end
 
@@ -77,5 +77,10 @@ private
 
   def sounds_like_a_date?(field)
     field.to_s.match(/date|time/i)
+  end
+
+  def parse_date(value)
+    return '' if value.blank?
+    Date.parse(value).to_date.to_s(:db)
   end
 end

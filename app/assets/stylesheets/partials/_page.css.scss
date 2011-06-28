@@ -98,3 +98,18 @@ article.report {
   border-bottom: 1px dotted silver;
   padding-top: 16px;
 }
+
+label {
+  display: inline-block;
+  width: 10em;
+}
+
+form.report {
+  input.string, textarea {
+    width: 600px;
+  }
+
+  #report_sql_query {
+    font-family: Menlo, Monaco, "Lucida Console", monospace
+  }
+}

@@ -22,7 +22,7 @@ end
 
 def select_organizations_for(user)
   orgs = Organization.order("id ASC").all
-  ids = []
+  ids = user.organization_ids.dup
   loop do
     orgs.each do |org|
       s = "#{org.id}. #{org.long_name} (#{org.name})"
@@ -86,6 +86,26 @@ namespace :users do
   task :list => :environment do
     User.all.each do |u|
       puts " *".blue + " #{u.id}".yellow + " #{u.email}".cyan
+    end
+  end
+
+  desc "Change a user's organization membership"
+  task :select_orgs => :environment do
+    email = prompt_for "User's email address"
+    u = User.where(:email => email).first
+    if u
+      puts "Found a user that might be the one you're looking for:"
+      puts "  ID: #{u.id}"
+      puts "  Email: #{u.email}"
+      select_organizations_for u
+      if u.save
+        success "User ID #{u.id} now belongs to orgs #{u.organization_ids.inspect}"
+      else
+        error "Couldn't save the user; validation errors follow"
+        u.errors.full_messages.each { |m| puts "  #{m}"}
+      end
+    else
+      error "Couldn't find a user with that email"
     end
   end
 end

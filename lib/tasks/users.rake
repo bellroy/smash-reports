@@ -20,12 +20,41 @@ def confirm?(msg)
   yn == "y"
 end
 
+def select_organizations_for(user)
+  orgs = Organization.order("id ASC").all
+  ids = []
+  loop do
+    orgs.each do |org|
+      s = "#{org.id}. #{org.long_name} (#{org.name})"
+      if ids.include? org.id
+        puts "#{CHECKMARK} #{s}".green
+      else
+        puts "  #{s}"
+      end
+    end
+    v = prompt_for "Organization ID, or 'q' to finish picking organizations"
+    break if v == 'q'
+    id = v.to_i
+    unless orgs.map(&:id).include? id
+      error "Couldn't find an organization with that id."
+      next
+    end
+    if ids.include? id
+      ids.delete id
+    else
+      ids << id
+    end
+  end
+  user.organization_ids = ids
+end
+
 namespace :users do
   desc "Create a new user"
   task :create => :environment do
     u = User.new
     u.email = prompt_for "Email"
     u.password = prompt_for "Password"
+    select_organizations_for u
     if u.save
       success "User ID #{u.id} created for #{u.email}"
     else

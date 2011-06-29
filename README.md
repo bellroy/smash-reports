@@ -9,10 +9,11 @@ SELECT statements.
 
 There are rake tasks for simple user management:
 
-    $ rake -T | grep users
-    rake users:create  # Create a new user
-    rake users:delete  # Delete a user
-    rake users:list    # List users
+    $ rake -T users
+    rake users:create       # Create a new user
+    rake users:delete       # Delete a user
+    rake users:list         # List users
+    rake users:select_orgs  # Change a user's organization membership
 
 All front-end functionality requires a logged-in user.
 

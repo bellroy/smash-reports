@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  before_filter :authenticate_user!
+
   respond_to :html
   respond_to :csv, :only => :show
 

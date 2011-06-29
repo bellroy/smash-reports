@@ -1,3 +1,5 @@
+# NOTE the code in this file is as CS101-ish as you can get. Cleanup coming ASAP
+
 CHECKMARK = "\u2713"
 X = "\u2717"
 

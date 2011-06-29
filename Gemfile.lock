@@ -57,6 +57,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.1.1)
+    colorize (0.5.8)
     devise (1.4.0)
       bcrypt-ruby (~> 2.1.2)
       orm_adapter (~> 0.0.3)
@@ -149,6 +150,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-script
+  colorize
   compass!
   devise (~> 1.4.0)
   haml (>= 3.0.0)

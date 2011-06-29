@@ -7,11 +7,11 @@ def prompt_for(string)
 end
 
 def success(msg)
-  puts "#{CHECKMARK} #{msg}"
+  puts "#{CHECKMARK} #{msg}".green
 end
 
 def error(msg)
-  puts "#{X} #{msg}"
+  puts "#{X} #{msg}".red
 end
 
 namespace :users do

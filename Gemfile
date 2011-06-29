@@ -34,3 +34,4 @@ gem "simple_form", :git => "https://github.com/plataformatec/simple_form.git"
 #gem "ruport", :git => "https://github.com/ruport/ruport.git"
 gem "sequel", "~> 3.24.1"
 
+gem "devise", "~> 1.4.0"

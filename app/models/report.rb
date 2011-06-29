@@ -12,6 +12,9 @@ class Report < ActiveRecord::Base
     end
   end
 
+  belongs_to :organization
+  validates_associated :organization
+
   attr_accessor :field_values
   attr_reader :results
 

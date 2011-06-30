@@ -12,7 +12,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: smash-reports-3_development
+  database: smash-reports_development
   pool: 5
   username: root
   password:
@@ -25,7 +25,7 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: smash-reports-3_test
+  database: smash-reports_test
   pool: 5
   username: root
   password:
@@ -35,7 +35,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: smash-reports-3_production
+  database: smash-reports_production
   pool: 5
   username: root
   password:

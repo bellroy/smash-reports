@@ -13,12 +13,14 @@ class Report < ActiveRecord::Base
   end
 
   belongs_to :organization
-  validates_associated :organization
 
   attr_accessor :field_values
   attr_reader :results
 
+  validates :name, :presence => true
+  validates :sql_query, :presence => true
   validates :defaults, :yaml => true
+  validates_associated :organization
 
   after_initialize do
     @results = nil

@@ -1,6 +1,11 @@
 class Report < ActiveRecord::Base
-  def self.db; DB end
-  def db; self.class.db end
+  def self.report_db_for(organization)
+    REPORT_DBS[organization.name]
+  end
+
+  def db
+    self.class.report_db_for organization
+  end
 
   class YamlValidator < ActiveModel::EachValidator
     def validate_each(record, attribute, value)

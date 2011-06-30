@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Report do
   before :each do
     @db = double("Sequel::Mysql2::Database")
-    Report.stub(:db) { @db }
+    Report.stub(:report_db_for) { @db }
   end
 
   context "with a simple SQL query" do

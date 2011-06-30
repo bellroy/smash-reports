@@ -20,4 +20,9 @@ namespace :users do
   task :select_orgs => :environment do
     UserManager.new.select_orgs
   end
+
+  desc "Interactively manage users"
+  task :manage => :environment do
+    UserManager.new.run_interactive_session
+  end
 end

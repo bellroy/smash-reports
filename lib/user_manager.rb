@@ -25,6 +25,34 @@ end
 class UserManager
   include ConsoleInteraction
 
+  MENU = [
+    ["new", :create_user],
+    ["list", :list_users],
+    ["orgs", :select_orgs],
+    ["delete", :delete_user]
+  ]
+
+  def run_interactive_session
+    loop do
+      print_menu
+      choice = prompt_for "What now (q to quit)"
+      break if choice == 'q'
+      if MENU.assoc choice
+        send MENU.assoc(choice).last
+      else
+        error "No such command `#{choice}`"
+      end
+    end
+  end
+
+  def print_menu
+    puts
+    puts "User management commands:".yellow
+    MENU.each do |command|
+      puts "  #{command.first}"
+    end
+  end
+
   def select_user
     email = prompt_for "User's email address"
     u = User.where(:email => email).first

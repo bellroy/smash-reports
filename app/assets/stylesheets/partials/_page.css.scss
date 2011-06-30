@@ -1,5 +1,6 @@
 @import "compass/css3";
 @import "compass/typography/links";
+@import "compass/typography/lists";
 
 //-----------------------------------------------
 // The following html5-boilerplate styles should
@@ -58,6 +59,28 @@ header {
   color: #eee;
   a { @include link-colors(#eee, #eee, #eee, #eee); }
   nav { padding-bottom: 16px; }
+
+  nav.organizations {
+    position: absolute;
+    top: 16px;
+    right: 32px;
+    background: inherit;
+
+    ul {
+      @include no-bullet;
+      height: 24px;
+      overflow: hidden;
+    }
+    li {
+      display: block;
+      height: 24px;
+      line-height: 24px;
+    }
+
+    &:hover {
+      ul { height: auto; }
+    }
+  }
 }
 
 #main {

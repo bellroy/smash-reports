@@ -10,9 +10,7 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @report = @organization.reports.find(params[:id])
-    @report.field_values = params[:field_values]
-    @report.execute
+    @report = @organization.reports.find_and_execute(params[:id], params[:field_values])
     respond_with @report do |format|
       format.csv { render :text => @report.to_csv }
     end

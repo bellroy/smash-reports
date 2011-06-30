@@ -82,6 +82,10 @@ header {
       &:hover {
         @include background-image(linear-gradient(#eee, #111 4%, adjust-lightness(rgb(188,203,224), 10) 4%, adjust-lightness(rgb(188,203,224), 10)));
       }
+
+      -webkit-transition-property: height;
+      -webkit-transition-duration: 300ms;
+      -webkit-transition-timing-function: ease;
     }
 
     li.current {
@@ -90,10 +94,6 @@ header {
 
     &:hover li, li.current {
       height: 24px;
-
-      -webkit-transition-property: height;
-      -webkit-transition-duration: 300ms;
-      -webkit-transition-timing-function: ease;
     }
   }
 }

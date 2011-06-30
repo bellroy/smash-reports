@@ -65,6 +65,8 @@ header {
     top: 16px;
     right: 32px;
     background: inherit;
+    padding: 8px 16px;
+    @include border-radius(2px);
 
     ul {
       @include no-bullet;

@@ -73,27 +73,26 @@ header {
 
     li {
       display: block;
-      line-height: 24px;
+      line-height: 32px;
       padding: 0 8px;
       height: 0px;
       overflow: hidden;
-      @include background-image(linear-gradient(#eee, #111 4%, rgb(188,203,224) 4%, rgb(188,203,224)));
 
-      &:hover {
-        @include background-image(linear-gradient(#eee, #111 4%, adjust-lightness(rgb(188,203,224), 10) 4%, adjust-lightness(rgb(188,203,224), 10)));
-      }
+      @include background(rgb(188,203,224));
+      &:hover { @include background(adjust-lightness(rgb(188,203,224), 10)); }
+      &.current { @include background(rgb(188,203,224)); }
 
       -webkit-transition-property: height;
       -webkit-transition-duration: 300ms;
       -webkit-transition-timing-function: ease;
     }
 
-    li.current {
-      @include background(rgb(188,203,224));
-    }
-
-    &:hover li, li.current {
-      height: 24px;
+    &:hover li, li.current { height: 32px; }
+    &:hover li {
+      border-top-color: #111;
+      border-top-style: solid;
+      border-top-width: 1px;
+      &:first-child { border-top-width: 0; }
     }
   }
 }

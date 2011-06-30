@@ -1,0 +1,10 @@
+your-org-name:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: sensitive-financials
+  pool: 5
+  username: CFO
+  password: s3cret
+  socket: /tmp/mysql.sock
+

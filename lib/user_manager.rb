@@ -25,6 +25,17 @@ end
 class UserManager
   include ConsoleInteraction
 
+  def select_user
+    email = prompt_for "User's email address"
+    u = User.where(:email => email).first
+    if u
+      success "Found user ID #{u.id}"
+      u
+    else
+      error "Couldn't find a user with that email address"
+    end
+  end
+
   def select_organizations_for(user)
     orgs = Organization.order("id ASC").all
     ids = user.organization_ids.dup
@@ -67,20 +78,12 @@ class UserManager
   end
 
   def delete_user
-    email = prompt_for "User's email address"
-    u = User.where(:email => email).first
-    if u
-      puts "Found a user that might be the one you're looking for:"
-      puts "  ID: #{u.id}"
-      puts "  Email: #{u.email}"
-      if confirm? "Are you sure you want to delete them?"
-        u.destroy
-        success "User ID #{u.id} deleted"
-      else
-        error "Cancelled!"
-      end
+    return unless u = select_user
+    if confirm? "Are you sure you want to delete them?"
+      u.destroy
+      success "User ID #{u.id} deleted"
     else
-      error "Couldn't find a user with that email address."
+      error "Cancelled!"
     end
   end
 
@@ -91,21 +94,13 @@ class UserManager
   end
 
   def select_orgs
-    email = prompt_for "User's email address"
-    u = User.where(:email => email).first
-    if u
-      puts "Found a user that might be the one you're looking for:"
-      puts "  ID: #{u.id}"
-      puts "  Email: #{u.email}"
-      select_organizations_for u
-      if u.save
-        success "User ID #{u.id} now belongs to orgs #{u.organization_ids.inspect}"
-      else
-        error "Couldn't save the user; validation errors follow"
-        u.errors.full_messages.each { |m| puts "  #{m}"}
-      end
+    return unless u = select_user
+    select_organizations_for u
+    if u.save
+      success "User ID #{u.id} now belongs to orgs #{u.organization_ids.inspect}"
     else
-      error "Couldn't find a user with that email"
+      error "Couldn't save the user; validation errors follow"
+      u.errors.full_messages.each { |m| puts "  #{m}"}
     end
   end
 end

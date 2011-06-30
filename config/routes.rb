@@ -4,4 +4,6 @@ SmashReports3::Application.routes.draw do
   resources :organizations, :path => '', :only => :index do
     resources :reports
   end
+
+  root :to => "organizations#index"
 end

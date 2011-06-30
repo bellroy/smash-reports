@@ -68,19 +68,19 @@ header {
     padding: 8px 16px;
     @include border-radius(2px);
 
-    ul {
-      @include no-bullet;
-      height: 24px;
-      overflow: hidden;
-    }
     li {
       display: block;
-      height: 24px;
       line-height: 24px;
+      height: 0px;
+      overflow: hidden;
     }
 
-    &:hover {
-      ul { height: auto; }
+    &:hover li, li.current {
+      height: 24px;
+
+      -webkit-transition-property: height;
+      -webkit-transition-duration: 300ms;
+      -webkit-transition-timing-function: ease;
     }
   }
 }

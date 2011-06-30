@@ -1,6 +1,9 @@
 SmashReports3::Application.routes.draw do
   devise_for :users
 
-  resources :reports
-  root :to => "reports#index"
+  resources :organizations, :path => '', :only => :index do
+    resources :reports
+  end
+
+  root :to => "organizations#index"
 end

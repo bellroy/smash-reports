@@ -25,6 +25,13 @@ class Report < ActiveRecord::Base
     @field_values = {}
   end
 
+  def self.find_and_execute(id, field_values)
+    report = find(id)
+    report.field_values = field_values
+    report.execute
+    report
+  end
+
   def field_values=(h)
     @field_values = h || {}
   end

@@ -1,4 +1,15 @@
+- if user_signed_in?
+  %nav.organizations
+    %ul
+      - if current_organization.present?
+        %li.current= current_organization.long_name
+      - else
+        %li.current Choose organization
+      - organizations.each do |org|
+        - next if current_organization == org
+        %li= link_to org.long_name, organization_reports_url(org)
+
 - if content_for? :header
   = content_for :header
 - else
-  %h1= link_to "Smash Reports", reports_url
+  %h1= link_to "Smash Reports", root_url

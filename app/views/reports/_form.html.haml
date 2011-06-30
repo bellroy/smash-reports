@@ -1,4 +1,4 @@
-= simple_form_for report do |f|
+= simple_form_for [@organization, report] do |f|
   = f.input :name, :placeholder => "Top-selling products"
   = f.input :description, :as => :text, :placeholder => "Lists the top-selling, by quantity, products for a given range of dates", :input_html => { :rows => 3 }
   = f.input :sql_query, :placeholder => "SELECT sku, sum(qty) [...] WHERE sale_date >= <% start_date %> AND sale_date < <% end_date %>", :as => :text

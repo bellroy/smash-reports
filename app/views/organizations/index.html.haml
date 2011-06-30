@@ -1,0 +1,7 @@
+- content_for :header do
+  %h1 Smash Reports
+
+- @organizations.each do |org|
+  %a{:href => organization_reports_url(org)}
+    %article.organization
+      %h3= h org.long_name

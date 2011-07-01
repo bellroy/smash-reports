@@ -1,10 +1,10 @@
-source 'http://rubygems.org'
+source :rubygems
 
 # Core rails and extensions
 gem 'rails', '3.1.0.rc4'
 gem 'mysql2'
 gem "sequel", "~> 3.24.1"
-gem "devise", "~> 1.4.0"
+gem "devise", "~> 1.4.2"
 gem "simple_form", :git => "https://github.com/plataformatec/simple_form.git"
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 

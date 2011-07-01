@@ -151,6 +151,12 @@ form.report {
   #report_sql_query {
     font-family: Menlo, Monaco, "Lucida Console", monospace
   }
+
+  .hint {
+    margin-left: 10em;
+    width: 600px;
+    padding-bottom: 1em;
+  }
 }
 
 form.report-parameters {

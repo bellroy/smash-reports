@@ -1,7 +1,15 @@
 = simple_form_for [@organization, report] do |f|
-  = f.input :name, :placeholder => "Top-selling products"
-  = f.input :description, :as => :text, :placeholder => "Lists the top-selling, by quantity, products for a given range of dates", :input_html => { :rows => 3 }
-  = f.input :sql_query, :placeholder => "SELECT sku, sum(qty) [...] WHERE sale_date >= <% start_date %> AND sale_date < <% end_date %>", :as => :text
+  = f.input :name
+  = f.input :description, :as => :text, :input_html => { :rows => 3 }
+  = f.input :sql_query, :as => :text
+  .hint
+    You can create parameterised reports by adding parameters to your SQL query. Instead of including hardcoded values in your query, choose a name for your parameter and wrap it with the magic tags like <code>&lt;% my_parameter_name %&gt;</code>. For example
+    %code
+      %pre
+        SELECT * FROM inventory_items WHERE price &gt;= &lt;% min_price %&gt;
+    This would create a report with one parameter, the minimum price. Any time you were to run the report, you'd be asked to enter the 'Min Price'.
   = f.input :defaults, :placeholder => "start_date: 1/1/2010", :as => :text, :input_html => { :rows => 3 }
+  .hint
+    Set default values for your report's parameters like '<code>min_price: 100</code>', one on each line.
   = f.button :submit
 

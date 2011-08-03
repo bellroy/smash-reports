@@ -46,6 +46,22 @@ class ReportsController < ApplicationController
     respond_with(@organization, @report = @organization.reports.find(params[:id]))
   end
 
+  def deleted
+    all_versions = Version.all(:conditions => { :event => 'destroy',
+                                                :item_type => Report.name})
+                   .map {|v| [v.reify, v] }
+    @versions = all_versions.select {|rv| rv.first.organization == @organization &&
+                                          nil == Report.find_by_id(rv.first.id)}
+    respond_with(@organization, @versions)
+  end
+
+  def undelete
+    version = params[:version_id]
+    rep = Version.find(version).reify
+    rep.save
+    respond_with(@organization, @report = @organization.reports.find(rep.id))
+  end
+
   private
   def forbidden
     render :text => "Forbidden", :status => 403

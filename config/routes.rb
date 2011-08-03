@@ -6,6 +6,9 @@ SmashReports3::Application.routes.draw do
   end
 
   resources :organizations, :path => '', :only => :index do
+    get "/reports/deleted" => "reports#deleted", :as => :deleted_reports
+    post "/reports/undelete/:version_id" => "reports#undelete", :as => :undelete_report
+
     resources :reports do
       put 'revert', :on => :member
     end

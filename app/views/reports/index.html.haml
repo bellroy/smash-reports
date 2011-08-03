@@ -2,6 +2,7 @@
   %h1 All Reports
   %nav
     = link_to "Add New Report", new_report_url
+    = link_to "Deleted Reports", organization_deleted_reports_url
 
 - @reports.each do |report|
   %a.report{:href => url_for(report)}

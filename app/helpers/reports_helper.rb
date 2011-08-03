@@ -15,6 +15,10 @@ module ReportsHelper
     edit_organization_report_url(report.organization, report, *args)
   end
 
+  def delete_report_url(report, *args)
+    organization_report_url(report.organization, report, *args)
+  end
+
   def url_for(*args)
     return report_url(args.first) if args.first && args.first.is_a?(Report)
     super

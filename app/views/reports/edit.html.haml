@@ -4,5 +4,7 @@
   %nav
     = link_to "Run report", @report
     = link_to "Back to report list", reports_url
+    .delete_button
+      = button_to("Delete report", delete_report_url(@report), :method => :delete)
 
 = render :partial => 'form', :object => @report, :as => :report

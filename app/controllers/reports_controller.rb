@@ -34,7 +34,7 @@ class ReportsController < ApplicationController
 
   def destroy
     @report = @organization.reports.destroy(params[:id])
-    respond_with(@organization, @report, :location => reports_url)
+    respond_with(@organization, @report, :location => view_context.reports_url)
   end
 
   private

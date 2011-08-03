@@ -11,6 +11,8 @@ gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 # Utilities
 gem "colorize"
 gem "psych"
+gem "paper_trail", '~> 2'
+
 
 # Asset template engines
 gem "coffee-script"

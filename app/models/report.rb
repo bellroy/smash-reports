@@ -1,4 +1,7 @@
 class Report < ActiveRecord::Base
+  has_paper_trail
+
+
   def self.report_db_for(organization)
     REPORT_DBS[organization.name]
   end

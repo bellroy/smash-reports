@@ -37,6 +37,15 @@ class ReportsController < ApplicationController
     respond_with(@organization, @report, :location => view_context.reports_url)
   end
 
+  def revert
+    @report = @organization.reports.find(params[:id])
+    version = params[:report][:version]
+    if version
+      @report.versions.find(version).reify.save
+    end
+    respond_with(@organization, @report = @organization.reports.find(params[:id]))
+  end
+
   private
   def forbidden
     render :text => "Forbidden", :status => 403

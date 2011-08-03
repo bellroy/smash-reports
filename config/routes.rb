@@ -6,7 +6,9 @@ SmashReports3::Application.routes.draw do
   end
 
   resources :organizations, :path => '', :only => :index do
-    resources :reports
+    resources :reports do
+      put 'revert', :on => :member
+    end
   end
 
   root :to => "organizations#index"

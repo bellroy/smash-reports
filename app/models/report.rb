@@ -24,6 +24,7 @@ class Report < ActiveRecord::Base
 
   attr_accessor :field_values
   attr_reader :results
+  attr_reader :error
 
   validates :name, :presence => true
   validates :sql_query, :presence => true
@@ -48,7 +49,13 @@ class Report < ActiveRecord::Base
 
   def execute
     return if needs_more_data?
-    @results = db.fetch sql_query_with_params(report_fields_with_values)
+    begin
+      @results = db.fetch sql_query_with_params(report_fields_with_values)
+      @results.empty?          # Force SQL execution so we can catch any error
+    rescue Exception => e
+      @results = nil
+      @error = e.to_s
+    end
   end
 
   def needs_more_data?

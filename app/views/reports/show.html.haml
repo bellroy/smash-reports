@@ -9,5 +9,11 @@
   = render :partial => "fields", :object => @report.report_fields_with_values, :as => :fields
 
 - unless @report.needs_more_data?
-  = render :partial => "results", :object => @report.results
+  - results = @report.results
+  - if @report.error
+    ERROR :
+    = @report.error
+  - else
+    = render :partial => "results", :object => results
+
 

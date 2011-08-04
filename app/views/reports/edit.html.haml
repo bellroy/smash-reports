@@ -4,13 +4,10 @@
   %nav
     = link_to "Run report", @report
     = link_to "Back to report list", reports_url
-    .delete_button
-      = button_to("Delete Report", delete_report_url(@report), :method => :delete)
-
-    -# TODO - clean this up!
-    .version_select
-      = simple_form_for [@organization, @report], :url => revert_report_url(@report) do |f|
-        = f.input :version, :collection => @report.versions.reverse, :value_method => Proc.new {|x| x.id}, :label_method => Proc.new {|x| "Select version before #{x.created_at}"}
-        = f.submit "Revert Report"
+    .version_controls
+      .delete_button
+        = button_to("Delete Report", delete_report_url(@report), :method => :delete)
+      .version_select
+        = render :partial => 'versions', :object => @report, :as => :report
 
 = render :partial => 'form', :object => @report, :as => :report

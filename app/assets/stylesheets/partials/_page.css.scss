@@ -138,9 +138,11 @@ article.report {
   padding-top: 16px;
 }
 
+$label_width: 100px;
+
 label {
   display: inline-block;
-  width: 10em;
+  width: $label_width;
 }
 
 form.report {
@@ -153,7 +155,7 @@ form.report {
   }
 
   .hint {
-    margin-left: 10em;
+    margin-left: $label_width;
     width: 600px;
     padding-bottom: 1em;
   }
@@ -163,6 +165,28 @@ form.report-parameters {
   margin-bottom: 16px;
 }
 
-.delete_button, .delete_button div, .delete_button form {
-  display: inline;
+
+
+body.reports.edit {
+
+  .version_controls {
+    float: right;
+    width: 320px;
+    padding: 10px;
+    background-color: #ddd;
+
+    legend {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    p.separator {
+      margin: 20px 0;
+      font-weight: bold;
+
+    }
+  }
+
+  form.report {
+  }
 }

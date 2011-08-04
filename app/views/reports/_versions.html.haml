@@ -1,5 +1,6 @@
 = simple_form_for [@organization, @report], :url => revert_report_url(@report) do |f|
+  %legend Restore an earlier version
   = f.input :version, :collection => @report.versions.reverse,
             :value_method => Proc.new {|x| x.id},
-            :label_method => Proc.new {|x| "Select version before '#{x.event}' at #{x.created_at}"}
-  = f.submit "Revert Report"
+            :label_method => Proc.new {|x| "Before '#{x.event}' at #{l x.created_at}"}
+  = f.submit "Revert Report", :class => 'submit'

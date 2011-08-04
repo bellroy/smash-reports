@@ -3,13 +3,16 @@
   %nav
     = link_to "Back to report list", reports_url
 
-- @versions.each do |report,version|
-  %article.report
-    %h3= h report.name
-    %p.description= h report.description
-    Deleted at 
-    = version.created_at
-    = button_to("Undelete Report",
-                organization_undelete_report_url(:version_id => version.id),
-                :method => :post)
+- if @versions.empty?
+  There are no deleted reports
+- else
+  - @versions.each do |report,version|
+    %article.report
+      %h3= h report.name
+      %p.description= h report.description
+      Deleted at
+      = version.created_at
+      = button_to("Undelete Report",
+                  organization_undelete_report_url(:version_id => version.id),
+                  :method => :post)
 

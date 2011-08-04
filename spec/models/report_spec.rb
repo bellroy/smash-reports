@@ -19,6 +19,16 @@ describe Report do
     end
   end
 
+  context "with an invalid SQL query" do
+    before { subject.sql_query = "SELECT * FROM foos WHERE asdf'"}
+    it 'should set an error' do
+      subject.execute
+      subject.results.should be_nil
+      subject.error.should_not be_nil
+    end
+  end
+
+
   context "with a SQL query with fields" do
     before { subject.sql_query = "SELECT * FROM foos WHERE bar = '<% bar %>'"}
 

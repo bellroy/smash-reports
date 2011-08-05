@@ -1,3 +1,5 @@
+require 'csv'
+
 class Report < ActiveRecord::Base
   has_paper_trail
 
@@ -83,7 +85,13 @@ class Report < ActiveRecord::Base
 
   def to_csv
     return "" if needs_more_data?
-    @results.to_csv
+    CSV.generate(:col_sep => ',') do |csv|
+      columns = @results.columns
+      csv << columns
+      @results.each do |row|
+        csv << columns.map{|col| row[col]}
+      end
+    end
   end
 
 private
